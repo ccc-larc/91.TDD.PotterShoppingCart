@@ -5,6 +5,9 @@ from potter_shopping_cart import Cart, POTTER_VOL_1, POTTER_VOL_2
 
 class PotterShoppingCartTest(unittest.TestCase):
 
+    def setUp(self):
+        self.cart = Cart()
+
     def test_v1x1_should_price_100(self):
         """
         Scenario: 第一集買了一本，其他都沒買，價格應為 100 * 1 = 100 元
@@ -16,15 +19,12 @@ class PotterShoppingCartTest(unittest.TestCase):
             When 結帳
             Then 價格應為 100 元
         """
-        # arrange
-        cart = Cart()
-
         # act
-        cart.add_book(POTTER_VOL_1)
+        self.cart.add_book(POTTER_VOL_1)
 
         # assert
         expected = 100
-        self.assertEqual(cart.get_price(), expected)
+        self.assertEqual(self.cart.get_price(), expected)
 
     def test_v1x1_v2x1_should_price_190(self):
         """
@@ -37,16 +37,13 @@ class PotterShoppingCartTest(unittest.TestCase):
             When 結帳
             Then 價格應為 190 元
         """
-        # arrange
-        cart = Cart()
-
         # act
-        cart.add_book(POTTER_VOL_1)
-        cart.add_book(POTTER_VOL_2)
+        self.cart.add_book(POTTER_VOL_1)
+        self.cart.add_book(POTTER_VOL_2)
 
         # assert
         expected = 190
-        self.assertEqual(cart.get_price(), expected)
+        self.assertEqual(self.cart.get_price(), expected)
 
 
 if __name__ == '__main__':

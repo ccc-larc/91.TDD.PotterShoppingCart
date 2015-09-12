@@ -2,6 +2,7 @@
 
 POTTER_VOL_1 = 1
 POTTER_VOL_2 = 2
+POTTER_VOL_3 = 3
 
 BOOK_PRICE = 100
 
@@ -18,6 +19,8 @@ class Cart(object):
         book_count = sum(self._books.itervalues(), 0)
         if book_count == 2:
             discount = 0.95
+        elif book_count == 3:
+            discount = 0.9
         else:
             discount = 1.0
         return BOOK_PRICE * book_count * discount

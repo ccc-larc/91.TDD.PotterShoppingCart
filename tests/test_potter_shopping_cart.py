@@ -155,6 +155,9 @@ class PotterShoppingCartTest(unittest.TestCase):
 class BookSetTest(unittest.TestCase):
 
     def test_group_books_to_set_1book(self):
+        """
+        第一集一本，組成：一本書
+        """
         # arrange
         books = {
             POTTER_VOL_1: 1,
@@ -170,6 +173,9 @@ class BookSetTest(unittest.TestCase):
         self.assertListEqual(booksets, expected)
 
     def test_group_books_to_set_2books(self):
+        """
+        一二集各一本，組成：兩本套書
+        """
         # arrange
         books = {
             POTTER_VOL_1: 1,
@@ -186,6 +192,9 @@ class BookSetTest(unittest.TestCase):
         self.assertListEqual(booksets, expected)
 
     def test_group_books_to_set_3books(self):
+        """
+        一二三集各一本，組成：三本套書
+        """
         # arrange
         books = {
             POTTER_VOL_1: 1,
@@ -203,6 +212,9 @@ class BookSetTest(unittest.TestCase):
         self.assertListEqual(booksets, expected)
 
     def test_group_books_to_set_4books(self):
+        """
+        一二三四集各一本，組成：四本套書
+        """
         # arrange
         books = {
             POTTER_VOL_1: 1,
@@ -221,6 +233,9 @@ class BookSetTest(unittest.TestCase):
         self.assertListEqual(booksets, expected)
 
     def test_group_books_to_set_5books(self):
+        """
+        一二三四五集各一本，組成：五本套書
+        """
         # arrange
         books = {
             POTTER_VOL_1: 1,
@@ -240,6 +255,9 @@ class BookSetTest(unittest.TestCase):
         self.assertListEqual(booksets, expected)
 
     def test_group_books_to_set_3books_and_1book(self):
+        """
+        一二集各一本，第三集兩本，組成：三本套書＋一本書
+        """
         # arrange
         books = {
             POTTER_VOL_1: 1,
@@ -254,6 +272,27 @@ class BookSetTest(unittest.TestCase):
         expected = [
             BookSet({POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3}),
             BookSet({POTTER_VOL_3}),
+        ]
+        self.assertListEqual(booksets, expected)
+
+    def test_group_books_to_set_3books_and_2books(self):
+        """
+        第一集一本，第二三集各兩本，組成：三本套書＋兩本套書
+        """
+        # arrange
+        books = {
+            POTTER_VOL_1: 1,
+            POTTER_VOL_2: 2,
+            POTTER_VOL_3: 2,
+        }
+
+        # act
+        booksets = BookSet.group_books_to_set(books)
+
+        # assert
+        expected = [
+            BookSet({POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3}),
+            BookSet({POTTER_VOL_2, POTTER_VOL_3}),
         ]
         self.assertListEqual(booksets, expected)
 

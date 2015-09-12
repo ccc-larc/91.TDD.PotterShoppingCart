@@ -4,6 +4,7 @@ POTTER_VOL_1 = 1
 POTTER_VOL_2 = 2
 POTTER_VOL_3 = 3
 POTTER_VOL_4 = 4
+POTTER_VOL_5 = 5
 
 BOOK_PRICE = 100
 
@@ -24,6 +25,8 @@ class Cart(object):
             discount = 0.9
         elif book_count == 4:
             discount = 0.8
+        elif book_count == 5:
+            discount = 0.75
         else:
             discount = 1.0
         return BOOK_PRICE * book_count * discount

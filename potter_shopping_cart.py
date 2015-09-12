@@ -19,7 +19,7 @@ class Cart(object):
         self._books[book_id] = self._books.get(book_id, 0) + 1
 
     def get_price(self):
-        booksets = group_books_to_set(self._books)
+        booksets = BookSet.group_books_to_set(self._books)
 
         price = 0
         for bookset in booksets:
@@ -29,19 +29,22 @@ class Cart(object):
         return price
 
 
-def group_books_to_set(books):
-    books = deepcopy(books)
+class BookSet(object):
 
-    booksets = []
-    while sum(books.itervalues(), 0):
-        new_bookset = set(books)
-        booksets.append(new_bookset)
-        for book_id in new_bookset:
-            books[book_id] -= 1
-            if books[book_id] == 0:
-                del books[book_id]
+    @staticmethod
+    def group_books_to_set(books):
+        books = deepcopy(books)
 
-    return booksets
+        booksets = []
+        while sum(books.itervalues(), 0):
+            new_bookset = set(books)
+            booksets.append(new_bookset)
+            for book_id in new_bookset:
+                books[book_id] -= 1
+                if books[book_id] == 0:
+                    del books[book_id]
+
+        return booksets
 
 
 def _get_bookset_discount(bookset):

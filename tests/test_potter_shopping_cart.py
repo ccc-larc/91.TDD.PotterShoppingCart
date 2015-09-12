@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from potter_shopping_cart import Cart, POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4, POTTER_VOL_5, \
-    group_books_to_set
+from potter_shopping_cart import Cart, POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4, POTTER_VOL_5, BookSet
 
 
 class PotterShoppingCartTest(unittest.TestCase):
@@ -131,7 +130,7 @@ class PotterShoppingCartTest(unittest.TestCase):
         self.assertEqual(self.cart.get_price(), expected)
 
 
-class Test(unittest.TestCase):
+class BookSetTest(unittest.TestCase):
 
     def test_group_books_to_set_1book(self):
         # arrange
@@ -140,7 +139,7 @@ class Test(unittest.TestCase):
         }
 
         # act
-        booksets = group_books_to_set(books)
+        booksets = BookSet.group_books_to_set(books)
 
         # assert
         expected = [
@@ -156,7 +155,7 @@ class Test(unittest.TestCase):
         }
 
         # act
-        booksets = group_books_to_set(books)
+        booksets = BookSet.group_books_to_set(books)
 
         # assert
         expected = [
@@ -173,7 +172,7 @@ class Test(unittest.TestCase):
         }
 
         # act
-        booksets = group_books_to_set(books)
+        booksets = BookSet.group_books_to_set(books)
 
         # assert
         expected = [
@@ -191,7 +190,7 @@ class Test(unittest.TestCase):
         }
 
         # act
-        booksets = group_books_to_set(books)
+        booksets = BookSet.group_books_to_set(books)
 
         # assert
         expected = [
@@ -210,7 +209,7 @@ class Test(unittest.TestCase):
         }
 
         # act
-        booksets = group_books_to_set(books)
+        booksets = BookSet.group_books_to_set(books)
 
         # assert
         expected = [
@@ -227,7 +226,7 @@ class Test(unittest.TestCase):
         }
 
         # act
-        booksets = group_books_to_set(books)
+        booksets = BookSet.group_books_to_set(books)
 
         # assert
         expected = [

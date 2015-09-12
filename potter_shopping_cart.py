@@ -23,9 +23,7 @@ class Cart(object):
 
         price = 0
         for bookset in booksets:
-            book_count = bookset.get_book_count()
-            discount = _get_bookset_discount(bookset)
-            price += BOOK_PRICE * book_count * discount
+            price += bookset.get_discount_price()
         return price
 
 
@@ -40,12 +38,17 @@ class BookSet(object):
             return False
         return self._bookset == set(other.iter_book_id())
 
-    def get_book_count(self):
+    def _get_book_count(self):
         return len(self._bookset)
 
     def iter_book_id(self):
         for book_id in self._bookset:
             yield book_id
+
+    def get_discount_price(self):
+        book_count = self._get_book_count()
+        discount = self._get_discount()
+        return BOOK_PRICE * book_count * discount
 
     @staticmethod
     def group_books_to_set(books):
@@ -62,19 +65,16 @@ class BookSet(object):
 
         return booksets
 
+    def _get_discount(self):
+        book_count = self._get_book_count()
 
-def _get_bookset_discount(bookset):
-    assert isinstance(bookset, BookSet)
-
-    book_count = bookset.get_book_count()
-
-    if book_count == 2:  # 兩本套書
-        return 0.95
-    elif book_count == 3:  # 三本套書
-        return 0.9
-    elif book_count == 4:  # 四本套書
-        return 0.8
-    elif book_count == 5:  # 五本套書
-        return 0.75
-    else:  # 非套書
-        return 1.0
+        if book_count == 2:  # 兩本套書
+            return 0.95
+        elif book_count == 3:  # 三本套書
+            return 0.9
+        elif book_count == 4:  # 四本套書
+            return 0.8
+        elif book_count == 5:  # 五本套書
+            return 0.75
+        else:  # 非套書
+            return 1.0

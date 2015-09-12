@@ -19,9 +19,14 @@ class Cart(object):
         self._books[book_id] = self._books.get(book_id, 0) + 1
 
     def get_price(self):
-        book_count = sum(self._books.itervalues(), 0)
-        discount = _get_bookset_discount(set(self._books))
-        return BOOK_PRICE * book_count * discount
+        booksets = group_books_to_set(self._books)
+
+        price = 0
+        for bookset in booksets:
+            book_count = len(bookset)
+            discount = _get_bookset_discount(bookset)
+            price += BOOK_PRICE * book_count * discount
+        return price
 
 
 def group_books_to_set(books):

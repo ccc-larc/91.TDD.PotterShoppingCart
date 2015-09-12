@@ -109,26 +109,26 @@ class PotterShoppingCartTest(unittest.TestCase):
         expected = 375
         self.assertEqual(self.cart.get_price(), expected)
 
-    # def test_v1x1_v2x1_v3x2_should_price_370(self):
-    #     """
-    #     Scenario: 一二集各買了一本，第三集買了兩本，價格應為100*3*0.9 + 100 = 370
-    #         Given 第一集買了 1 本
-    #         And 第二集買了 1 本
-    #         And 第三集買了 2 本
-    #         And 第四集買了 0 本
-    #         And 第五集買了 0 本
-    #         When 結帳
-    #         Then 價格應為 370 元
-    #     """
-    #     # act
-    #     self.cart.add_book(POTTER_VOL_1)
-    #     self.cart.add_book(POTTER_VOL_2)
-    #     self.cart.add_book(POTTER_VOL_3)
-    #     self.cart.add_book(POTTER_VOL_3)
-    #
-    #     # assert
-    #     expected = 370
-    #     self.assertEqual(self.cart.get_price(), expected)
+    def test_v1x1_v2x1_v3x2_should_price_370(self):
+        """
+        Scenario: 一二集各買了一本，第三集買了兩本，價格應為100*3*0.9 + 100 = 370
+            Given 第一集買了 1 本
+            And 第二集買了 1 本
+            And 第三集買了 2 本
+            And 第四集買了 0 本
+            And 第五集買了 0 本
+            When 結帳
+            Then 價格應為 370 元
+        """
+        # act
+        self.cart.add_book(POTTER_VOL_1)
+        self.cart.add_book(POTTER_VOL_2)
+        self.cart.add_book(POTTER_VOL_3)
+        self.cart.add_book(POTTER_VOL_3)
+
+        # assert
+        expected = 370
+        self.assertEqual(self.cart.get_price(), expected)
 
 
 class Test(unittest.TestCase):

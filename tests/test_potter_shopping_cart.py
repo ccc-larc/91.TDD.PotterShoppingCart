@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest
-from potter_shopping_cart import Cart, POTTER_VOL_1
+from potter_shopping_cart import Cart, POTTER_VOL_1, POTTER_VOL_2
 
 
 class PotterShoppingCartTest(unittest.TestCase):
@@ -24,6 +24,28 @@ class PotterShoppingCartTest(unittest.TestCase):
 
         # assert
         expected = 100
+        self.assertEqual(cart.get_price(), expected)
+
+    def test_v1x1_v2x1_should_price_190(self):
+        """
+        Scenario: 第一集買了一本，第二集也買了一本，價格應為100*2*0.95=190
+            Given 第一集買了 1 本
+            And 第二集買了 1 本
+            And 第三集買了 0 本
+            And 第四集買了 0 本
+            And 第五集買了 0 本
+            When 結帳
+            Then 價格應為 190 元
+        """
+        # arrange
+        cart = Cart()
+
+        # act
+        cart.add_book(POTTER_VOL_1)
+        cart.add_book(POTTER_VOL_2)
+
+        # assert
+        expected = 190
         self.assertEqual(cart.get_price(), expected)
 
 

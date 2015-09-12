@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from copy import deepcopy
 
 POTTER_VOL_1 = 1
 POTTER_VOL_2 = 2
@@ -21,6 +22,21 @@ class Cart(object):
         book_count = sum(self._books.itervalues(), 0)
         discount = _get_bookset_discount(set(self._books))
         return BOOK_PRICE * book_count * discount
+
+
+def group_books_to_set(books):
+    books = deepcopy(books)
+
+    booksets = []
+    while sum(books.itervalues(), 0):
+        new_bookset = set(books)
+        booksets.append(new_bookset)
+        for book_id in new_bookset:
+            books[book_id] -= 1
+            if books[book_id] == 0:
+                del books[book_id]
+
+    return booksets
 
 
 def _get_bookset_discount(bookset):

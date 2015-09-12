@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import unittest
-from potter_shopping_cart import Cart, POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4, POTTER_VOL_5
+from potter_shopping_cart import Cart, POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4, POTTER_VOL_5, \
+    group_books_to_set
 
 
 class PotterShoppingCartTest(unittest.TestCase):
@@ -128,6 +129,112 @@ class PotterShoppingCartTest(unittest.TestCase):
     #     # assert
     #     expected = 370
     #     self.assertEqual(self.cart.get_price(), expected)
+
+
+class Test(unittest.TestCase):
+
+    def test_group_books_to_set_1book(self):
+        # arrange
+        books = {
+            POTTER_VOL_1: 1,
+        }
+
+        # act
+        booksets = group_books_to_set(books)
+
+        # assert
+        expected = [
+            {POTTER_VOL_1},
+        ]
+        self.assertListEqual(booksets, expected)
+
+    def test_group_books_to_set_2books(self):
+        # arrange
+        books = {
+            POTTER_VOL_1: 1,
+            POTTER_VOL_2: 1,
+        }
+
+        # act
+        booksets = group_books_to_set(books)
+
+        # assert
+        expected = [
+            {POTTER_VOL_1, POTTER_VOL_2},
+        ]
+        self.assertListEqual(booksets, expected)
+
+    def test_group_books_to_set_3books(self):
+        # arrange
+        books = {
+            POTTER_VOL_1: 1,
+            POTTER_VOL_2: 1,
+            POTTER_VOL_3: 1,
+        }
+
+        # act
+        booksets = group_books_to_set(books)
+
+        # assert
+        expected = [
+            {POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3},
+        ]
+        self.assertListEqual(booksets, expected)
+
+    def test_group_books_to_set_4books(self):
+        # arrange
+        books = {
+            POTTER_VOL_1: 1,
+            POTTER_VOL_2: 1,
+            POTTER_VOL_3: 1,
+            POTTER_VOL_4: 1,
+        }
+
+        # act
+        booksets = group_books_to_set(books)
+
+        # assert
+        expected = [
+            {POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4},
+        ]
+        self.assertListEqual(booksets, expected)
+
+    def test_group_books_to_set_5books(self):
+        # arrange
+        books = {
+            POTTER_VOL_1: 1,
+            POTTER_VOL_2: 1,
+            POTTER_VOL_3: 1,
+            POTTER_VOL_4: 1,
+            POTTER_VOL_5: 1,
+        }
+
+        # act
+        booksets = group_books_to_set(books)
+
+        # assert
+        expected = [
+            {POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4, POTTER_VOL_5},
+        ]
+        self.assertListEqual(booksets, expected)
+
+    def test_group_books_to_set_3books_and_1book(self):
+        # arrange
+        books = {
+            POTTER_VOL_1: 1,
+            POTTER_VOL_2: 1,
+            POTTER_VOL_3: 2,
+        }
+
+        # act
+        booksets = group_books_to_set(books)
+
+        # assert
+        expected = [
+            {POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3},
+            {POTTER_VOL_3},
+        ]
+        self.assertListEqual(booksets, expected)
 
 
 if __name__ == '__main__':

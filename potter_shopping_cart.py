@@ -23,7 +23,7 @@ class Cart(object):
 
         price = 0
         for bookset in booksets:
-            book_count = len(bookset)
+            book_count = bookset.get_book_count()
             discount = _get_bookset_discount(bookset)
             price += BOOK_PRICE * book_count * discount
         return price
@@ -31,15 +31,31 @@ class Cart(object):
 
 class BookSet(object):
 
+    def __init__(self, books):
+        assert iter(books)
+        self._bookset = set(books)
+
+    def __eq__(self, other):
+        if not isinstance(other, BookSet):
+            return False
+        return self._bookset == set(other.iter_book_id())
+
+    def get_book_count(self):
+        return len(self._bookset)
+
+    def iter_book_id(self):
+        for book_id in self._bookset:
+            yield book_id
+
     @staticmethod
     def group_books_to_set(books):
         books = deepcopy(books)
 
         booksets = []
         while sum(books.itervalues(), 0):
-            new_bookset = set(books)
-            booksets.append(new_bookset)
-            for book_id in new_bookset:
+            bookset = BookSet(books)
+            booksets.append(bookset)
+            for book_id in bookset.iter_book_id():
                 books[book_id] -= 1
                 if books[book_id] == 0:
                     del books[book_id]
@@ -48,9 +64,9 @@ class BookSet(object):
 
 
 def _get_bookset_discount(bookset):
-    assert isinstance(bookset, set)
+    assert isinstance(bookset, BookSet)
 
-    book_count = len(bookset)
+    book_count = bookset.get_book_count()
 
     if book_count == 2:  # 兩本套書
         return 0.95

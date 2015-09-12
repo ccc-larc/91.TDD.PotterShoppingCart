@@ -143,7 +143,7 @@ class BookSetTest(unittest.TestCase):
 
         # assert
         expected = [
-            {POTTER_VOL_1},
+            BookSet({POTTER_VOL_1}),
         ]
         self.assertListEqual(booksets, expected)
 
@@ -159,7 +159,7 @@ class BookSetTest(unittest.TestCase):
 
         # assert
         expected = [
-            {POTTER_VOL_1, POTTER_VOL_2},
+            BookSet({POTTER_VOL_1, POTTER_VOL_2}),
         ]
         self.assertListEqual(booksets, expected)
 
@@ -176,7 +176,7 @@ class BookSetTest(unittest.TestCase):
 
         # assert
         expected = [
-            {POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3},
+            BookSet({POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3}),
         ]
         self.assertListEqual(booksets, expected)
 
@@ -194,7 +194,7 @@ class BookSetTest(unittest.TestCase):
 
         # assert
         expected = [
-            {POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4},
+            BookSet({POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4}),
         ]
         self.assertListEqual(booksets, expected)
 
@@ -213,7 +213,7 @@ class BookSetTest(unittest.TestCase):
 
         # assert
         expected = [
-            {POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4, POTTER_VOL_5},
+            BookSet({POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3, POTTER_VOL_4, POTTER_VOL_5}),
         ]
         self.assertListEqual(booksets, expected)
 
@@ -230,8 +230,8 @@ class BookSetTest(unittest.TestCase):
 
         # assert
         expected = [
-            {POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3},
-            {POTTER_VOL_3},
+            BookSet({POTTER_VOL_1, POTTER_VOL_2, POTTER_VOL_3}),
+            BookSet({POTTER_VOL_3}),
         ]
         self.assertListEqual(booksets, expected)
 

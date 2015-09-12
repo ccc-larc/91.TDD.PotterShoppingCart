@@ -36,14 +36,13 @@ class BookSet(object):
     def __eq__(self, other):
         if not isinstance(other, BookSet):
             return False
-        return self._bookset == set(other.iter_book_id())
+        return self._bookset == other.get_bookset()
 
     def _get_book_count(self):
         return len(self._bookset)
 
-    def iter_book_id(self):
-        for book_id in self._bookset:
-            yield book_id
+    def get_bookset(self):
+        return set(self._bookset)
 
     def get_discount_price(self):
         book_count = self._get_book_count()
@@ -55,10 +54,10 @@ class BookSet(object):
         books = deepcopy(books)
 
         booksets = []
-        while sum(books.itervalues(), 0):
+        while books:
             bookset = BookSet(books)
             booksets.append(bookset)
-            for book_id in bookset.iter_book_id():
+            for book_id in bookset.get_bookset():
                 books[book_id] -= 1
                 if books[book_id] == 0:
                     del books[book_id]
